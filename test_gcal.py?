@@ -1,0 +1,29 @@
+from arcadepy import Arcade
+
+client = Arcade()
+
+USER_ID = "narasimhaiahrakshitha@gmail.com"  # must match Arcade login
+
+payload = {
+    "summary": "Interview prep",
+    "start_datetime": "2026-01-18T18:00:00",
+    "end_datetime": "2026-01-18T18:30:00",
+    "calendar_id": "primary",
+    "description": "Prep session via Arcade",
+    "location": "Online",
+    # Optional:
+    # "attendee_emails": ["someone@example.com"],
+    # "add_google_meet": True,
+}
+
+resp = client.tools.execute(
+    tool_name="GoogleCalendar.CreateEvent",
+    user_id=USER_ID,
+    input=payload
+)
+
+print("✅ Event created!")
+print("Event ID:", resp.output.value["event"]["id"])
+print("Link:", resp.output.value["event"]["htmlLink"])
+
+
